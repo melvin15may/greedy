@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Latest bookmarks{% endblock %}
+
+{% block heading %}
+<h2>Latest bookmarks</h2>
+{% endblock %}
+
+{% block content %}
+<ul class="list-unstyled">
+{% for bookmark in bookmarks %}
+    <li class="well">{% include "game/bookmark.html" %}</li>
+{% empty %}
+    <li>No bookmarks. :(</li>
+{% endfor %}
+</ul>
+{% if user.is_authenticated %}
+<p><a class="btn btn-default" href="{% url "game_bookmark_create" %}">
+    Create new bookmark</a></p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,17 @@
+<a class="lead" href="{{ bookmark.url }}">{{ bookmark.title }}</a>
+{% if bookmark.description %}
+    <br>{{ bookmark.description|linebreaksbr }}
+{% endif %}
+<br>
+{% if bookmark.tags.count %}
+    {% for tag in bookmark.tags.all %}
+        <span class="badge">{{ tag|lower }}</span>&nbsp;
+    {% endfor %}
+{% endif %}
+<br>by <a href="{% url "game_bookmark_user" bookmark.owner.username %}">
+    {{ bookmark.owner.username }}</a>
+{{ bookmark.date_created|timesince }} ago
+{% if bookmark.owner == user %}
+    <br><a class="btn btn-default btn-xs"
+        href="{% url "game_bookmark_edit" bookmark.pk %}">Edit bookmark</a>
+{% endif %}
